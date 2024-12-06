@@ -22,16 +22,13 @@ class Vehichle {
 
   moveOneWay() {
     this.speed = random(0, 10);
-    if (random(100) > 50) {
-      this.x += this.speed;
-    }
+    this.x += this.speed;
   }
 
-  // moveOtherWay() {
-  //   if (random(100) > 50) {
-  //     this.x -= this.speed;
-  //   }
-  // }
+  moveOtherWay() {
+    this.speed = random(0, 10);
+    this.x -= this.speed;
+  }
 }
 
 class Car1 extends Vehichle {
@@ -42,6 +39,9 @@ class Car1 extends Vehichle {
   display() {
     super.display();
     rect(this.x, this.y, this.speed, this.color, this.width, this.length);
+  }
+  move() {
+    super.moveOneWay;
   }
 }
 
@@ -54,6 +54,9 @@ class Car2 extends Vehichle {
     super.display();
     rect(this.x, this.y, this.speed, this.color, this.width, this.length);
   }
+  move() {
+    super.moveOtherWay;
+  }
 }
 
 class Bus1 extends Vehichle {
@@ -63,6 +66,9 @@ class Bus1 extends Vehichle {
   display() {
     super.display();
     rect(this.x, this.y, this.speed, this.color, this.width, this.length);
+  }
+  move() {
+    super.moveOneWay;
   }
 }
 
@@ -74,6 +80,9 @@ class Bus2 extends Vehichle {
     super.display();
     rect(this.x, this.y, this.speed, this.color, this.width, this.length);
   }
+  move() {
+    super.moveOtherWay;
+  }
 }
 
 class Bike1 extends Vehichle {
@@ -83,6 +92,9 @@ class Bike1 extends Vehichle {
   display() {
     super.display();
     rect (this.x, this.y, this.speed, this.color, this.width, this.length);
+  }
+  move() {
+    super.moveOneWay;
   }
 }
 
@@ -94,6 +106,9 @@ class Bike2 extends Vehichle {
     super.display();
     rect (this.x, this.y, this.speed, this.color, this.width, this.length);
   }
+  move() {
+    this.moveOtherWay;
+  }
 }
 
 let theVehichle = [];
@@ -101,17 +116,29 @@ let theVehichle = [];
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < 10; i++) {
-    if (random(100) > 33) {
-      let someCar = new Car1(random(width), random(height), random(0, 10), random(255), random(255), random(255), 10, 30);
+    if (random(100) > 16) {
+      let someCar = new Car1(random(width), random(height), random(0, 10), random(255), 10, 30);
       theVehichle.push(someCar);
     }
-    else if (random(100) > 33) {
-      let someBus = new Bus1(random(width), random(height), random(0, 10), random(255), random(255), random(255), 10, 100);
+    else if (random(100) > 16) {
+      let someCar2 = new Car2(random(width), random(height), random(0, 10), random(255), 10, 30);
+      theVehichle.push(someCar2);
+    }
+    else if (random(100) > 16) {
+      let someBus = new Bus1(random(width), random(height), random(0, 10), random(255), 10, 100);
       theVehichle.push(someBus);
     }
-    else {
-      let someBike = new Bike1(random(width), random(height), random(0, 10), random(255), random(255), random(255), 5, 7);
+    else if (random(100) > 16) {
+      let someBus2 = new Bus2(random(width), random(height), random(0, 10), random(255), 10, 100);
+      theVehichle.push(someBus2);
+    }
+    else if (random(100) > 16) {
+      let someBike = new Bike1(random(width), random(height), random(0, 10), random(255), 5, 7);
       theVehichle.push(someBike);
+    }
+    else {
+      let someBike2 = new Bike2(random(width), random(height), random(0, 10), random(255), 5, 7);
+      theVehichle.push(someBike2);
     }
   }
 }
