@@ -6,13 +6,13 @@
 // - describe what you did to take this project "above and beyond"
 
 class Vehichle {
-  constructor(x, y, speed, color, width, length) {
+  constructor(x, y, width, length, speed, color, ) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.color = color;
-    this.width;
-    this.length;
+    this.width = width;
+    this.length = length;
   }
 
   display () {
@@ -32,8 +32,8 @@ class Vehichle {
 }
 
 class Car1 extends Vehichle {
-  constructor(x, y, speed, color, width, length) {
-    super(x, y, speed, color, width, length);
+  constructor(x, y, width, length, speed, color) {
+    super(x, y, width, length, speed, color);
   }
 
   display() {
@@ -46,8 +46,8 @@ class Car1 extends Vehichle {
 }
 
 class Car2 extends Vehichle {
-  constructor(x, y, speed, color, width, length) {
-    super(x, y, speed, color, width, length);
+  constructor(x, y, width, length, speed, color) {
+    super(x, y, width, length, speed, color);
   }
 
   display() {
@@ -60,8 +60,8 @@ class Car2 extends Vehichle {
 }
 
 class Bus1 extends Vehichle {
-  constructor(x, y, speed, color, width, length) {
-    super(x, y, speed, color, width, length);
+  constructor(x, y, width, length, speed, color) {
+    super(x, y, width, length, speed, color);
   }
   display() {
     super.display();
@@ -73,8 +73,8 @@ class Bus1 extends Vehichle {
 }
 
 class Bus2 extends Vehichle {
-  constructor(x, y, speed, color, width, length) {
-    super(x, y, speed, color, width, length);
+  constructor(x, y, width, length, speed, color) {
+    super(x, y, width, length, speed, color);
   }
   display() {
     super.display();
@@ -86,8 +86,8 @@ class Bus2 extends Vehichle {
 }
 
 class Bike1 extends Vehichle {
-  constructor(x, y, speed, color, width, length) {
-    super(x, y, speed, color, width, length);
+  constructor(x, y, width, length, speed, color) {
+    super(x, y, width, length, speed, color);
   }
   display() {
     super.display();
@@ -99,8 +99,8 @@ class Bike1 extends Vehichle {
 }
 
 class Bike2 extends Vehichle {
-  constructor(x, y, speed, color, width, length) {
-    super(x, y, speed, color, width, length);
+  constructor(x, y, width, length, speed, color) {
+    super(x, y, width, length, speed, color);
   }
   display() {
     super.display();
@@ -117,27 +117,27 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < 10; i++) {
     if (random(100) > 16) {
-      let someCar = new Car1(random(width), random(height), random(0, 10), random(255), 10, 30);
+      let someCar = new Car1(random(width), random(height), 100, 30, random(0, 10), random(255));
       theVehichle.push(someCar);
     }
     else if (random(100) > 16) {
-      let someCar2 = new Car2(random(width), random(height), random(0, 10), random(255), 10, 30);
+      let someCar2 = new Car2(random(width), random(height), 100, 30, random(0, 10), random(255));
       theVehichle.push(someCar2);
     }
     else if (random(100) > 16) {
-      let someBus = new Bus1(random(width), random(height), random(0, 10), random(255), 10, 100);
+      let someBus = new Bus1(random(width), random(height), 200, 30, random(0, 10), random(255));
       theVehichle.push(someBus);
     }
     else if (random(100) > 16) {
-      let someBus2 = new Bus2(random(width), random(height), random(0, 10), random(255), 10, 100);
+      let someBus2 = new Bus2(random(width), random(height), 200, 30, random(0, 10), random(255));
       theVehichle.push(someBus2);
     }
     else if (random(100) > 16) {
-      let someBike = new Bike1(random(width), random(height), random(0, 10), random(255), 5, 7);
+      let someBike = new Bike1(random(width), random(height), 10, 5, random(0, 10), random(255));
       theVehichle.push(someBike);
     }
     else {
-      let someBike2 = new Bike2(random(width), random(height), random(0, 10), random(255), 5, 7);
+      let someBike2 = new Bike2(random(width), random(height), 10, 5, random(0, 10), random(255));
       theVehichle.push(someBike2);
     }
   }
