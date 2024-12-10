@@ -16,7 +16,6 @@ class Vehichle {
   }
 
   display () {
-    noStroke();
     fill(this.color);
   }
 
@@ -38,7 +37,7 @@ class Car1 extends Vehichle {
 
   display() {
     super.display();
-    rect(this.x, this.y, this.speed, this.color, this.width, this.length);
+    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
   move() {
     super.moveOneWay;
@@ -52,7 +51,7 @@ class Car2 extends Vehichle {
 
   display() {
     super.display();
-    rect(this.x, this.y, this.speed, this.color, this.width, this.length);
+    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
   move() {
     super.moveOtherWay;
@@ -65,7 +64,7 @@ class Bus1 extends Vehichle {
   }
   display() {
     super.display();
-    rect(this.x, this.y, this.speed, this.color, this.width, this.length);
+    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
   move() {
     super.moveOneWay;
@@ -78,7 +77,7 @@ class Bus2 extends Vehichle {
   }
   display() {
     super.display();
-    rect(this.x, this.y, this.speed, this.color, this.width, this.length);
+    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
   move() {
     super.moveOtherWay;
@@ -91,7 +90,7 @@ class Bike1 extends Vehichle {
   }
   display() {
     super.display();
-    rect (this.x, this.y, this.speed, this.color, this.width, this.length);
+    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
   move() {
     super.moveOneWay;
@@ -104,14 +103,35 @@ class Bike2 extends Vehichle {
   }
   display() {
     super.display();
-    rect (this.x, this.y, this.speed, this.color, this.width, this.length);
+    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
   move() {
     this.moveOtherWay;
   }
 }
 
+class Chicken {
+  constructor(x, y, width, length, speed, color) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.length = length;
+    this.speed = speed;
+    this.color = color;
+  }
+  display() {
+    fill(this.color);
+    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
+  }
+  movement() {
+    if (keyIsDown("w")) {
+      this.y -= this.speed;
+    }
+  }
+}
+
 let theVehichle = [];
+let theChicken = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -141,6 +161,8 @@ function setup() {
       theVehichle.push(someBike2);
     }
   }
+  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 5, random(255));
+  theChicken.push(someChicken);
 }
 
 function draw() {
@@ -149,5 +171,9 @@ function draw() {
     aVehichle.moveOneWay();
     aVehichle.moveOtherWay();
     aVehichle.display();
+  }
+  for (let aChicken of theChicken) {
+    aChicken.movement();
+    aChicken.display();
   }
 }
