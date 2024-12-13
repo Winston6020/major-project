@@ -123,8 +123,13 @@ class Chicken {
     rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
   movement() {
-    if (keyIsDown("w")) {
+    if (keyIsPressed("w")) {
       this.y -= this.speed;
+    }
+  }
+  function keyIsPressed() {
+    if(keyIsPressed) {
+      movement();
     }
   }
 }
