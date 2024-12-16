@@ -21,10 +21,10 @@ class Vehichle {
   }
   move() {
     if(this.direction === 1) {
-      this.speed += this.speed;
+      this.x += this.speed;
     }
     else if (this.direction === 2) {
-      this.speed -= this.speed;
+      this.x -= this.speed;
     }
   }
 }
@@ -122,14 +122,13 @@ class Chicken {
     fill(this.color);
     rect(this.x, this.y, this.width, this.length, this.speed, this.color);
   }
-  movement() {
-    if (keyIsPressed("w")) {
+
+  keyIsDown() {
+    if (key === "w") {
       this.y -= this.speed;
     }
-  }
-  function keyIsPressed() {
-    if(keyIsPressed) {
-      movement();
+    else {
+      this.y = this.y;
     }
   }
 }
@@ -139,29 +138,29 @@ let theChicken = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 10; i++) {
-    if (random(100) > 16) {
-      let someCar = new Car1(random(width), random(height), 100, 30, random(0, 10), random(255), 1);
+  for (let i = 0; i < 100; i++) {
+    if (random (100) > 50) {
+      let someCar = new Car1(random(width), random(height), 100, 30, 10, random(255), 1);
       theVehichle.push(someCar);
     }
-    else if (random(100) > 16) {
-      let someCar2 = new Car2(random(width), random(height), 100, 30, random(0, 10), random(255), 2);
+    else if (random(100) > 50) {
+      let someCar2 = new Car2(random(width), random(height), 100, 30, 10, random(255), 2);
       theVehichle.push(someCar2);
     }
-    else if (random(100) > 16) {
-      let someBus = new Bus1(random(width), random(height), 200, 30, random(0, 10), random(255), 1);
+    else if (random(100) > 50) {
+      let someBus = new Bus1(random(width), random(height), 200, 30, 8, random(255), 1);
       theVehichle.push(someBus);
     }
-    else if (random(100) > 16) {
-      let someBus2 = new Bus2(random(width), random(height), 200, 30, random(0, 10), random(255), 2);
+    else if (random(100) > 50) {
+      let someBus2 = new Bus2(random(width), random(height), 200, 30, 8, random(255), 2);
       theVehichle.push(someBus2);
     }
-    else if (random(100) > 16) {
-      let someBike = new Bike1(random(width), random(height), 10, 5, random(0, 10), random(255), 1);
+    else if (random(100) > 50) {
+      let someBike = new Bike1(random(width), random(height), 10, 5, 3, random(255), 1);
       theVehichle.push(someBike);
     }
     else {
-      let someBike2 = new Bike2(random(width), random(height), 10, 5, random(0, 10), random(255), 2);
+      let someBike2 = new Bike2(random(width), random(height), 10, 5, 3, random(255), 2);
       theVehichle.push(someBike2);
     }
   }
@@ -176,7 +175,7 @@ function draw() {
     aVehichle.display();
   }
   for (let aChicken of theChicken) {
-    aChicken.movement();
+    aChicken.keyIsDown();
     aChicken.display();
   }
 }
