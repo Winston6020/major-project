@@ -127,14 +127,13 @@ class Chicken {
     if (key === "w") {
       this.y -= this.speed;
     }
-    else {
-      this.y = this.y;
-    }
   }
 }
 
 let theVehichle = [];
 let theChicken = [];
+let grid;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -177,5 +176,24 @@ function draw() {
   for (let aChicken of theChicken) {
     aChicken.keyIsDown();
     aChicken.display();
+  }
+}
+
+function displayGrid() {
+
+}
+
+function createGrid(cols, rows) {
+  let newGrid = [];
+  for (let y = 0; y < rows; y++) {
+    newGrid.push([]);
+    for (let x = 0; x < cols; x++) {
+      if (random(100) < 50) {
+        newGrid.push(0);
+      }
+      else {
+        newGrid.push(1);
+      }
+    }
   }
 }
