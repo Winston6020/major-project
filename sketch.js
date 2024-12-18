@@ -133,6 +133,8 @@ class Chicken {
 let theVehichle = [];
 let theChicken = [];
 let grid;
+const GRID_SIZE = 50;
+let cellSize;
 
 
 function setup() {
@@ -165,6 +167,8 @@ function setup() {
   }
   let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 5, random(255));
   theChicken.push(someChicken);
+  cellSize = height/GRID_SIZE;
+  grid = createGrid(GRID_SIZE, GRID_SIZE);
 }
 
 function draw() {
@@ -177,10 +181,19 @@ function draw() {
     aChicken.keyIsDown();
     aChicken.display();
   }
+  displayGrid();
 }
 
 function displayGrid() {
+  for (let y = 0; y < 30; y++) {
+    for (let x = 0; x < width; x++) {
+      if (grid[y][x] === 1 || grid[y][x] === 0){
+        fill("green");
+        square(x, y, cellSize);
+      }
 
+    }
+  }
 }
 
 function createGrid(cols, rows) {
@@ -196,4 +209,5 @@ function createGrid(cols, rows) {
       }
     }
   }
+  return newGrid;
 }
