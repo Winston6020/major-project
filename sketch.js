@@ -110,17 +110,16 @@ class Bike2 extends Vehichle {
 }
 
 class Chicken {
-  constructor(x, y, width, length, speed, color) {
+  constructor(x, y, width, length, speed) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.length = length;
     this.speed = speed;
-    this.color = color;
   }
   display() {
-    fill(this.color);
-    rect(this.x, this.y, this.width, this.length, this.speed, this.color);
+    fill("brown");
+    rect(this.x, this.y, this.width, this.length, this.speed);
   }
 
   keyIsDown() {
@@ -130,8 +129,45 @@ class Chicken {
   }
 }
 
+class Log {
+  constructor(x, y, width, length, speed, direction) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.length = length;
+    this.speed = speed;
+    this.direction = direction;
+  }
+  display() {
+    fill("brown");
+    rect(this.x, this.y, this.width, this.length, this.speed, this.direction);
+  }
+
+  movement(){
+    if (this.direction === 1) {
+      this.x += this.speed;
+    }
+    else if (this.direction === 2) {
+      this.x -= this.speed;
+    }
+  }
+}
+class log1 extends Log {
+  constructor(x, y, width, length, speed, direction) {
+    super(x, y, width, length, speed, direction);
+  }
+  display() {
+    super.display();
+    rect(this.x, this.y, this.width, this.length, this.speed, this.direction);
+  }
+  movement() {
+    super.movement();
+  }
+}
+
 let theVehichle = [];
 let theChicken = [];
+let theLog = [];
 let grid;
 const GRID_SIZE = 50;
 let cellSize;
@@ -165,14 +201,24 @@ function setup() {
       theVehichle.push(someBike2);
     }
   }
-  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 5, random(255));
+  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 1);
   theChicken.push(someChicken);
+  for (let i = 0; i < 50; i++) {
+    if (random(100) > 50){
+      let someLog = new Log(random(width), random(height), 50, 20, 2, 1);
+      theLog.push(someLog);
+    }
+    else {
+      let someLog1 = new log1(random(width), random(height), 50, 20, 2, 2);
+      theLog.push(someLog1);
+    }
+  }
   cellSize = height/GRID_SIZE;
   grid = createGrid(GRID_SIZE, GRID_SIZE);
 }
 
 function draw() {
-  background(220);
+  background("green");
   for(let aVehichle of theVehichle) {
     aVehichle.move();
     aVehichle.display();
@@ -181,17 +227,20 @@ function draw() {
     aChicken.keyIsDown();
     aChicken.display();
   }
+  for (let aLog of theLog) {
+    aLog.movement();
+    aLog.display();
+  }
   displayGrid();
 }
 
 function displayGrid() {
   for (let y = 0; y < 30; y++) {
     for (let x = 0; x < width; x++) {
-      if (grid[y][x] === 1 || grid[y][x] === 0){
+      if (grid[y][x]){
         fill("green");
-        square(x, y, cellSize);
+        square(x*cellSize, y*cellSize, cellSize);
       }
-
     }
   }
 }

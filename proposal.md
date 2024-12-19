@@ -8,8 +8,8 @@
 - A lose condition where the chicken gets hit by a car or falls in the stream
 - Basic movement for the chicken like moving forward and possibly jumping
 - Varying speeds for the obstacles on the road
+- sound effects
 ## Nice To Have
 - randomized number of streams or roads
-- sound effects
 - varying widths for the roads and streams
 - A limited amount of time to stay on a log before it sinks
