@@ -169,7 +169,7 @@ let theVehichle = [];
 let theChicken = [];
 let theLog = [];
 let grid;
-const GRID_SIZE = 50;
+const GRID_SIZE = 10;
 let cellSize;
 
 
@@ -237,7 +237,7 @@ function draw() {
 function displayGrid() {
   for (let y = 0; y < 30; y++) {
     for (let x = 0; x < width; x++) {
-      if (grid[y][x]){
+      if (grid[y][x] === 1 || grid[y][x] === 0){
         fill("green");
         square(x*cellSize, y*cellSize, cellSize);
       }
@@ -251,10 +251,10 @@ function createGrid(cols, rows) {
     newGrid.push([]);
     for (let x = 0; x < cols; x++) {
       if (random(100) < 50) {
-        newGrid.push(0);
+        newGrid[y].push(0);
       }
       else {
-        newGrid.push(1);
+        newGrid[y].push(1);
       }
     }
   }
