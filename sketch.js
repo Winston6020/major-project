@@ -107,6 +107,7 @@ class Bike2 extends Vehichle {
   move() {
     super.move();
   }
+
 }
 
 class Chicken {
@@ -168,9 +169,9 @@ class log1 extends Log {
 let theVehichle = [];
 let theChicken = [];
 let theLog = [];
-let grid;
-const GRID_SIZE = 10;
-let cellSize;
+// let grid;
+// const GRID_SIZE = 10;
+// let cellSize;
 
 
 function setup() {
@@ -213,8 +214,9 @@ function setup() {
       theLog.push(someLog1);
     }
   }
-  cellSize = height/GRID_SIZE;
-  grid = createGrid(GRID_SIZE, GRID_SIZE);
+  setInterval(new Vehichle, 500);
+  // cellSize = height/GRID_SIZE;
+  // grid = createGrid(GRID_SIZE, GRID_SIZE);
 }
 
 function draw() {
@@ -231,32 +233,32 @@ function draw() {
     aLog.movement();
     aLog.display();
   }
-  displayGrid();
+  // displayGrid();
 }
 
-function displayGrid() {
-  for (let y = 0; y < 30; y++) {
-    for (let x = 0; x < width; x++) {
-      if (grid[y][x] === 1 || grid[y][x] === 0){
-        fill("green");
-        square(x*cellSize, y*cellSize, cellSize);
-      }
-    }
-  }
-}
+// function displayGrid() {
+//   for (let y = 0; y < 30; y++) {
+//     for (let x = 0; x < width; x++) {
+//       if (grid[y][x] === 1 || grid[y][x] === 0){
+//         fill("green");
+//         square(x*cellSize, y*cellSize, cellSize);
+//       }
+//     }
+//   }
+// }
 
-function createGrid(cols, rows) {
-  let newGrid = [];
-  for (let y = 0; y < rows; y++) {
-    newGrid.push([]);
-    for (let x = 0; x < cols; x++) {
-      if (random(100) < 50) {
-        newGrid[y].push(0);
-      }
-      else {
-        newGrid[y].push(1);
-      }
-    }
-  }
-  return newGrid;
-}
+// function createGrid(cols, rows) {
+//   let newGrid = [];
+//   for (let y = 0; y < rows; y++) {
+//     newGrid.push([]);
+//     for (let x = 0; x < cols; x++) {
+//       if (random(100) < 50) {
+//         newGrid[y].push(0);
+//       }
+//       else {
+//         newGrid[y].push(1);
+//       }
+//     }
+//   }
+//   return newGrid;
+// }
