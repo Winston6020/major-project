@@ -214,9 +214,19 @@ function setup() {
       theLog.push(someLog1);
     }
   }
-  setInterval(new Vehichle, 500);
+  setInterval(spawnVechicle, 500);
   // cellSize = height/GRID_SIZE;
   // grid = createGrid(GRID_SIZE, GRID_SIZE);
+}
+
+function spawnVechicle() {
+  let someVehicle = new Vehichle(x, y, width, length, speed, color, direction);
+  theVehichle.push(someVehicle);
+}
+
+function spawnLog() {
+  let someLog = new Log(x, y, width, length, speed, direction);
+  theLog.push(someLog);
 }
 
 function draw() {
