@@ -176,56 +176,86 @@ let theLog = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 10; i++) {
     if (random (100) > 50) {
-      let someCar = new Car1(random(width), random(height), 100, 30, 10, random(255), 1);
+      let someCar = new Car1(0, random(height), 100, 30, 10, random(255), 1);
       theVehichle.push(someCar);
     }
     else if (random(100) > 50) {
-      let someCar2 = new Car2(random(width), random(height), 100, 30, 10, random(255), 2);
+      let someCar2 = new Car2(windowWidth, random(height), 100, 30, 10, random(255), 2);
       theVehichle.push(someCar2);
     }
     else if (random(100) > 50) {
-      let someBus = new Bus1(random(width), random(height), 200, 30, 8, random(255), 1);
+      let someBus = new Bus1(0, random(height), 200, 30, 8, random(255), 1);
       theVehichle.push(someBus);
     }
     else if (random(100) > 50) {
-      let someBus2 = new Bus2(random(width), random(height), 200, 30, 8, random(255), 2);
+      let someBus2 = new Bus2(windowWidth, random(height), 200, 30, 8, random(255), 2);
       theVehichle.push(someBus2);
     }
     else if (random(100) > 50) {
-      let someBike = new Bike1(random(width), random(height), 10, 5, 3, random(255), 1);
+      let someBike = new Bike1(0, random(height), 10, 5, 3, random(255), 1);
       theVehichle.push(someBike);
     }
     else {
-      let someBike2 = new Bike2(random(width), random(height), 10, 5, 3, random(255), 2);
+      let someBike2 = new Bike2(windowWidth, random(height), 10, 5, 3, random(255), 2);
       theVehichle.push(someBike2);
     }
   }
   let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 1);
   theChicken.push(someChicken);
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 10; i++) {
     if (random(100) > 50){
-      let someLog = new Log(random(width), random(height), 50, 20, 2, 1);
+      let someLog = new Log(0, random(height), 50, 20, 2, 1);
       theLog.push(someLog);
     }
     else {
-      let someLog1 = new log1(random(width), random(height), 50, 20, 2, 2);
+      let someLog1 = new log1(windowWidth, random(height), 50, 20, 2, 2);
       theLog.push(someLog1);
     }
   }
   setInterval(spawnVechicle, 500);
+  setInterval(spawnLog, 500);
   // cellSize = height/GRID_SIZE;
   // grid = createGrid(GRID_SIZE, GRID_SIZE);
 }
 
 function spawnVechicle() {
-  let someVehicle = new Vehichle(x, y, width, length, speed, color, direction);
-  theVehichle.push(someVehicle);
+  if (random (100) > 50) {
+    let someCar = new Car1(0, random(height), 100, 30, 10, random(255), 1);
+    theVehichle.push(someCar);
+  }
+  else if (random(100) > 50) {
+    let someCar2 = new Car2(windowWidth, random(height), 100, 30, 10, random(255), 2);
+    theVehichle.push(someCar2);
+  }
+  else if (random(100) > 50) {
+    let someBus = new Bus1(0, random(height), 200, 30, 8, random(255), 1);
+    theVehichle.push(someBus);
+  }
+  else if (random(100) > 50) {
+    let someBus2 = new Bus2(windowWidth, random(height), 200, 30, 8, random(255), 2);
+    theVehichle.push(someBus2);
+  }
+  else if (random(100) > 50) {
+    let someBike = new Bike1(0, random(height), 10, 5, 3, random(255), 1);
+    theVehichle.push(someBike);
+  }
+  else {
+    let someBike2 = new Bike2(windowWidth, random(height), 10, 5, 3, random(255), 2);
+    theVehichle.push(someBike2);
+  }
 }
 
 function spawnLog() {
-  let someLog = new Log(x, y, width, length, speed, direction);
+  if (random(100) > 50){
+    let someLog = new Log(0, random(height), 50, 20, 2, 1);
+    theLog.push(someLog);
+  }
+  else {
+    let someLog1 = new log1(windowWidth, random(height), 50, 20, 2, 2);
+    theLog.push(someLog1);
+  }
   theLog.push(someLog);
 }
 
