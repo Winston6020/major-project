@@ -110,26 +110,6 @@ class Bike2 extends Vehichle {
 
 }
 
-class Chicken {
-  constructor(x, y, width, length, speed) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.length = length;
-    this.speed = speed;
-  }
-  display() {
-    fill("brown");
-    rect(this.x, this.y, this.width, this.length, this.speed);
-  }
-
-  keyIsDown() {
-    if (key === "w") {
-      this.y -= this.speed;
-    }
-  }
-}
-
 class Log {
   constructor(x, y, width, length, speed, direction) {
     this.x = x;
@@ -153,6 +133,7 @@ class Log {
     }
   }
 }
+
 class log1 extends Log {
   constructor(x, y, width, length, speed, direction) {
     super(x, y, width, length, speed, direction);
@@ -166,6 +147,26 @@ class log1 extends Log {
   }
 }
 
+class Chicken {
+  constructor(x, y, width, length, speed) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.length = length;
+    this.speed = speed;
+  }
+  display() {
+    fill("brown");
+    rect(this.x, this.y, this.width, this.length, this.speed);
+  }
+
+  handleKeys() {
+    if (keyIsDown(87)) { //w
+      this.y -= this.speed;
+    }
+  }
+}
+
 let theVehichle = [];
 let theChicken = [];
 let theLog = [];
@@ -176,48 +177,22 @@ let theLog = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 10; i++) {
-    if (random (100) > 50) {
-      let someCar = new Car1(0, random(height), 100, 30, 10, random(255), 1);
-      theVehichle.push(someCar);
-    }
-    else if (random(100) > 50) {
-      let someCar2 = new Car2(windowWidth, random(height), 100, 30, 10, random(255), 2);
-      theVehichle.push(someCar2);
-    }
-    else if (random(100) > 50) {
-      let someBus = new Bus1(0, random(height), 200, 30, 8, random(255), 1);
-      theVehichle.push(someBus);
-    }
-    else if (random(100) > 50) {
-      let someBus2 = new Bus2(windowWidth, random(height), 200, 30, 8, random(255), 2);
-      theVehichle.push(someBus2);
-    }
-    else if (random(100) > 50) {
-      let someBike = new Bike1(0, random(height), 10, 5, 3, random(255), 1);
-      theVehichle.push(someBike);
-    }
-    else {
-      let someBike2 = new Bike2(windowWidth, random(height), 10, 5, 3, random(255), 2);
-      theVehichle.push(someBike2);
-    }
-  }
+  text("PRESS SPACE TO BEGIN", windowWidth/2, windowHeight/2, 100, 50);
+  
   let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 1);
   theChicken.push(someChicken);
-  for (let i = 0; i < 10; i++) {
-    if (random(100) > 50){
-      let someLog = new Log(0, random(height), 50, 20, 2, 1);
-      theLog.push(someLog);
-    }
-    else {
-      let someLog1 = new log1(windowWidth, random(height), 50, 20, 2, 2);
-      theLog.push(someLog1);
-    }
-  }
+
   setInterval(spawnVechicle, 500);
   setInterval(spawnLog, 500);
   // cellSize = height/GRID_SIZE;
   // grid = createGrid(GRID_SIZE, GRID_SIZE);
+}
+
+function startGame() {
+  if (keyIsDown(32)) {
+    spawnVechicle();
+    spawnLog();
+  }
 }
 
 function spawnVechicle() {
@@ -265,14 +240,15 @@ function draw() {
     aVehichle.move();
     aVehichle.display();
   }
-  for (let aChicken of theChicken) {
-    aChicken.keyIsDown();
-    aChicken.display();
-  }
   for (let aLog of theLog) {
     aLog.movement();
     aLog.display();
   }
+  for (let aChicken of theChicken) {
+    aChicken.handleKeys();
+    aChicken.display();
+  }
+  startGame();
   // displayGrid();
 }
 
