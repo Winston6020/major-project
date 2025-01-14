@@ -127,6 +127,20 @@ class Chicken {
       this.y -= this.speed;
     }
   }
+  winGame() {
+    if (this.y <= 0) {
+      
+      state = "menu";
+      outCome = "win";
+    }
+  }
+  loseGame() {
+    if (this.x === Vehichle.x && this.y === Vehichle.y) {
+
+      state = "menu";
+      outCome = "lose";
+    }
+  }
 }
 
 class Log {
@@ -168,11 +182,12 @@ class log1 extends Log {
 let theVehichle = [];
 let theChicken = [];
 let theLog = [];
-
+let gameState = "menu";
+let outCome;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  text("PRESS SPACE KEY TO BEGIN", windowWidth/2, windowHeight/2);
+  // text("PRESS SPACE KEY TO BEGIN", windowWidth/2, windowHeight/2);
   // for (let i = 0; i < 10; i++) {
   //   if (random (100) > 50) {
   //     let someCar = new Car1(0, random(height), 100, 30, 10, random(255), 1);
@@ -199,7 +214,7 @@ function setup() {
   //     theVehichle.push(someBike2);
   //   }
   // }
-  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 1);
+  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 10);
   theChicken.push(someChicken);
   // for (let i = 0; i < 10; i++) {
   //   if (random(100) > 50){
@@ -225,8 +240,18 @@ function startGame() {
     spawnLog();
     setInterval(spawnVechicle, 2000);
     setInterval(spawnLog, 2000);
+    gameState = "playing";
   }
 }
+
+// function winGame() {
+//   let theChicken = new Chicken(width/2, windowHeight-50, 10, 5, 1);
+//   if (theChicken.y === 0) {
+//     textSize(25);
+//     text("GREAT JOB", windowWidth/2 - 200, windowHeight/2);
+//     startGame();
+//   }
+// }
 
 function spawnVechicle() {
   if (random (100) > 50) {
@@ -268,19 +293,35 @@ function spawnLog() {
 
 function draw() {
   background("green");
-  startGame();
+  if (gameState === "menu") {
+    
+    startGame();
+  }
+  // winGame();
   // setInterval(spawnVechicle, 500);
   // setInterval(spawnLog, 500);
-  for(let aVehichle of theVehichle) {
-    aVehichle.move();
-    aVehichle.display();
+  else if (gameState === "playing") {
+    for(let aVehichle of theVehichle) {
+      aVehichle.move();
+      aVehichle.display();
+    }
+    for (let aLog of theLog) {
+      aLog.movement();
+      aLog.display();
+    }
+    for (let aChicken of theChicken) {
+      aChicken.handleKeys();
+      aChicken.display();
+      aChicken.winGame();
+      aChicken.loseGame();
+    }
   }
-  for (let aLog of theLog) {
-    aLog.movement();
-    aLog.display();
+  if(outCome === "win") {
+    textSize(25);
+    text("YOU WIN", windowWidth/2-200, windowHeight/2);
   }
-  for (let aChicken of theChicken) {
-    aChicken.handleKeys();
-    aChicken.display();
+  else if(outCome === "lose") {
+    textSize(25);
+    text("GAME OVER", windowWidth/2-200, windowHeight/2);
   }
 }
