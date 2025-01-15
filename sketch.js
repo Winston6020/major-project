@@ -130,14 +130,14 @@ class Chicken {
   winGame() {
     if (this.y <= 0) {
       
-      state = "menu";
+      // gameState = "menu";
       outCome = "win";
     }
   }
   loseGame() {
     if (this.x === Vehichle.x && this.y === Vehichle.y) {
-
-      state = "menu";
+      
+      // gameState = "menu";
       outCome = "lose";
     }
   }
@@ -293,8 +293,8 @@ function spawnLog() {
 
 function draw() {
   background("green");
+  
   if (gameState === "menu") {
-    
     startGame();
   }
   // winGame();
@@ -316,12 +316,14 @@ function draw() {
       aChicken.loseGame();
     }
   }
-  if(outCome === "win") {
+  if(gameState === "playing" && outCome === "win") {
     textSize(25);
     text("YOU WIN", windowWidth/2-200, windowHeight/2);
-  }
-  else if(outCome === "lose") {
+    gameState = "menu";
+  } 
+  else if(gameState === "playing" && outCome === "lose") {
     textSize(25);
     text("GAME OVER", windowWidth/2-200, windowHeight/2);
+    gameState = "menu";
   }
 }
