@@ -130,15 +130,20 @@ class Chicken {
   winGame() {
     if (this.y <= 0) {
       
-      // gameState = "menu";
+      gameState = "menu";
       outCome = "win";
     }
   }
-  loseGame() {
-    if (this.x === Vehichle.x && this.y === Vehichle.y) {
+  // loseGame() {
+  //   if (this.x === Vehichle.x && this.y === Vehichle.y) {
       
-      // gameState = "menu";
-      outCome = "lose";
+  //     gameState = "menu";
+  //     outCome = "lose";
+  //   }
+  // }
+  returnChicken() {
+    if(this.y <= 0) {
+      this.y = windowHeight - 50;
     }
   }
 }
@@ -184,6 +189,7 @@ let theChicken = [];
 let theLog = [];
 let gameState = "menu";
 let outCome;
+let hit = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -214,8 +220,8 @@ function setup() {
   //     theVehichle.push(someBike2);
   //   }
   // }
-  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 10);
-  theChicken.push(someChicken);
+  // let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 10);
+  // theChicken.push(someChicken);
   // for (let i = 0; i < 10; i++) {
   //   if (random(100) > 50){
   //     let someLog = new Log(0, random(height), 50, 20, 2, 1);
@@ -238,11 +244,16 @@ function startGame() {
     // erase(windowWidth/2-200, windowHeight/2);
     spawnVechicle();
     spawnLog();
+    // spawnChicken();
     setInterval(spawnVechicle, 2000);
     setInterval(spawnLog, 2000);
     gameState = "playing";
   }
 }
+
+// function detectCollision() {
+//   collideRectRect()
+// }
 
 // function winGame() {
 //   let theChicken = new Chicken(width/2, windowHeight-50, 10, 5, 1);
@@ -278,6 +289,11 @@ function spawnVechicle() {
     let someBike2 = new Bike2(windowWidth, random(height), 10, 5, 3, random(255), 2);
     theVehichle.push(someBike2);
   }
+  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 10);
+  theChicken.push(someChicken);
+  if (collideRectRect(0, random(height), 100, 30, width/2, windowHeight-50, 10, 5)) {
+    hit = !hit;
+  }
 }
 
 function spawnLog() {
@@ -290,6 +306,16 @@ function spawnLog() {
     theLog.push(someLog1);
   }
 }
+
+// function spawnChicken () {
+  
+// }
+
+// function returnChicken() {
+//   if(outCome === "win" || outCome === "lose") {
+
+//   }
+// }
 
 function draw() {
   background("green");
@@ -313,17 +339,25 @@ function draw() {
       aChicken.handleKeys();
       aChicken.display();
       aChicken.winGame();
-      aChicken.loseGame();
+      // aChicken.loseGame();
     }
   }
+
   if(gameState === "playing" && outCome === "win") {
-    textSize(25);
-    text("YOU WIN", windowWidth/2-200, windowHeight/2);
-    gameState = "menu";
+    // textSize(25);
+    // text("YOU WIN", windowWidth/2-200, windowHeight/2);
+    // gameState = "menu";
+    for(let aChicken of theChicken) {
+      aChicken.returnChicken();
+    }
+    
   } 
   else if(gameState === "playing" && outCome === "lose") {
-    textSize(25);
-    text("GAME OVER", windowWidth/2-200, windowHeight/2);
-    gameState = "menu";
+    // textSize(25);
+    // text("GAME OVER", windowWidth/2-200, windowHeight/2);
+    // gameState = "menu";
+    for (let aChicken of theChicken) {
+      aChicken.returnChicken();
+    }
   }
 }
