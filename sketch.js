@@ -134,13 +134,15 @@ class Chicken {
       outCome = "win";
     }
   }
-  // loseGame() {
-  //   if (this.x === Vehichle.x && this.y === Vehichle.y) {
-      
-  //     gameState = "menu";
-  //     outCome = "lose";
-  //   }
-  // }
+  loseGame() {
+    if (collideRectRect(this.x, this.y, this.width, this.height, Vehichle.x, Vehichle.y, Vehichle.width, Vehichle.length)) {
+      hit = !hit;
+    }
+    if (hit === true) {
+      gameState = "menu";
+      outCome = "lose";
+    }
+  }
   returnChicken() {
     if(this.y <= 0) {
       this.y = windowHeight - 50;
@@ -234,7 +236,6 @@ function setup() {
   // }
   // setInterval(spawnVechicle, 500);
   // setInterval(spawnLog, 500);
-  
 }
 
 function startGame() {
@@ -244,7 +245,7 @@ function startGame() {
     // erase(windowWidth/2-200, windowHeight/2);
     spawnVechicle();
     spawnLog();
-    // spawnChicken();
+    spawnChicken();
     setInterval(spawnVechicle, 2000);
     setInterval(spawnLog, 2000);
     gameState = "playing";
@@ -289,11 +290,6 @@ function spawnVechicle() {
     let someBike2 = new Bike2(windowWidth, random(height), 10, 5, 3, random(255), 2);
     theVehichle.push(someBike2);
   }
-  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 10);
-  theChicken.push(someChicken);
-  if (collideRectRect(0, random(height), 100, 30, width/2, windowHeight-50, 10, 5)) {
-    hit = !hit;
-  }
 }
 
 function spawnLog() {
@@ -307,19 +303,13 @@ function spawnLog() {
   }
 }
 
-// function spawnChicken () {
-  
-// }
-
-// function returnChicken() {
-//   if(outCome === "win" || outCome === "lose") {
-
-//   }
-// }
+function spawnChicken () {
+  let someChicken = new Chicken(width/2, windowHeight-50, 10, 5, 5);
+  theChicken.push(someChicken);
+}
 
 function draw() {
   background("green");
-  
   if (gameState === "menu") {
     startGame();
   }
@@ -339,7 +329,7 @@ function draw() {
       aChicken.handleKeys();
       aChicken.display();
       aChicken.winGame();
-      // aChicken.loseGame();
+      aChicken.loseGame();
     }
   }
 
@@ -350,7 +340,6 @@ function draw() {
     for(let aChicken of theChicken) {
       aChicken.returnChicken();
     }
-    
   } 
   else if(gameState === "playing" && outCome === "lose") {
     // textSize(25);
