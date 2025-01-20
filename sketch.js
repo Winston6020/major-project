@@ -135,12 +135,16 @@ class Chicken {
     }
   }
   loseGame() {
-    if (collideRectRect(this.x, this.y, this.width, this.height, Vehichle.x, Vehichle.y, Vehichle.width, Vehichle.length)) {
+    
+  }
+  checkCollision() {
+    if (collideRectRect(this.x, this.y, this.width, this.height, theVehichle.x, theVehichle.y, theVehichle.width, theVehichle.length)) {
       hit = !hit;
     }
     if (hit === true) {
       gameState = "menu";
       outCome = "lose";
+      console.log("I've been hit");
     }
   }
   returnChicken() {
@@ -320,6 +324,7 @@ function draw() {
     for(let aVehichle of theVehichle) {
       aVehichle.move();
       aVehichle.display();
+      theChicken[0].checkCollision(aVehichle.x, aVehichle.y, aVehichle.width, aVehichle.length);
     }
     for (let aLog of theLog) {
       aLog.movement();
